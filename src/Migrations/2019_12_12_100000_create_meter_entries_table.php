@@ -16,6 +16,8 @@ class CreateMeterEntriesTable extends Migration
         Schema::create('meter_entries', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type', 20);
+            $table->integer('user_id')->nullable();
+            $table->string('route_name')->nullable();
             $table->enum('is_slow', ['No', 'Yes'])->default('No');
             $table->longText('content');
             $table->dateTime('created_at')->nullable();

@@ -51,7 +51,7 @@ abstract class Monitor
      * @param array $content
      * @return mixed
      */
-    public function record($type, $isSlow, array $content)
+    public function record($type, $isSlow, array $content, string $routeName = null)
     {
         Meter::stopMonitoring();
 
@@ -59,6 +59,8 @@ abstract class Monitor
             'type' => $type,
             'is_slow' => $isSlow ? 'Yes' : 'No',
             'content' => $content,
+            'user_id' => auth()->user() ?  auth()->user()->id : null,
+            'route_name' => $routeName,
         ]);
 
         Meter::startMonitoring();
