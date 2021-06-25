@@ -11,7 +11,7 @@ class MeterModel extends Model
 
     protected $table = 'meter_entries';
 
-    protected $fillable = ['type', 'is_slow', 'content'];
+    protected $fillable = ['type', 'is_slow', 'content', 'user_id', 'route_name'];
 
     protected $casts = [
         'content' => 'json',
