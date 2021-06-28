@@ -80,7 +80,7 @@
             config('meter.monitors.' . Sarfraznawaz2005\Meter\Monitors\RequestMonitor::class . '.show_on_dashboard', true)
         )
             <div class="col-12 p-0 border-0">
-                @component('meter::components.chart', ['chart' => $requestTimeChart, 'title' => 'Access'])@endcomponent
+                @component('meter::components.chart', ['chart' => $accessChart, 'title' => 'Access'])@endcomponent
             </div>
         @endif
 

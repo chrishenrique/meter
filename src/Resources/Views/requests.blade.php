@@ -17,6 +17,7 @@
 
     <div class="tab-content">
         <div class="tab-pane fade show active" role="tabpanel" id="graph">
+            @component('meter::components.chart', ['chart' => $accessChart, 'title' => 'Access route'])@endcomponent
             @component('meter::components.chart', ['chart' => $timeChart, 'title' => 'Response Times'])@endcomponent
             @component('meter::components.chart', ['chart' => $memoryChart, 'title' => 'Memory Usage'])@endcomponent
         </div>

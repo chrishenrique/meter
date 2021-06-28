@@ -2,6 +2,7 @@
 
 namespace Sarfraznawaz2005\Meter\Charts;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Balping\JsonRaw\Raw;
 use Sarfraznawaz2005\Meter\Models\MeterModel;
@@ -22,11 +23,6 @@ class AccessChart extends Chart
             'maintainAspectRatio' => false,
             'title' => [
                 'display' => true,
-                'text' => [
-                    'Min ' . round(collect($this->getValues())->pluck('y')->min()) . ' | ' .
-                    'Avg ' . round(collect($this->getValues())->pluck('y')->average()) . ' | ' .
-                    'Max ' . round(collect($this->getValues())->pluck('y')->max())
-                ],
             ],
             'legend' => false,
             'scales' => [
@@ -36,7 +32,7 @@ class AccessChart extends Chart
                     ],
                     'scaleLabel' => [
                         'display' => true,
-                        'labelString' => 'Response Time (ms)'
+                        'labelString' => 'Access'
                     ]
                 ]],
                 'xAxes' => [[
@@ -57,7 +53,7 @@ class AccessChart extends Chart
             ],
             'tooltips' => [
                 'callbacks' => [
-                    'label' => new Raw('function(item, data) { return "Access: " + data.datasets[item.datasetIndex].data[item.index].y + " (Path: " + data.datasets[item.datasetIndex].data[item.index].x + ")"}')
+                    'label' => new Raw('function(item, data) { return "Access: " + data.datasets[item.datasetIndex].data[item.index]}')
                 ]
             ],
         ], true);
@@ -71,12 +67,11 @@ class AccessChart extends Chart
      */
     protected function setData(MeterModel $model)
     {
-        $items = DB::raw('route_name, count(route_name) as total')->type(Type::REQUEST)->filtered()->groupBy('route_name')->get();
-        
+        $items = $model->select(DB::raw('route_name, count(route_name) as total'))->type(Type::REQUEST)->filtered()->groupBy('route_name')->get();
         foreach ($items as $item) {
-            dd($item);
-            if (isset($item->content['duration'])) {
-                $this->data[(string)$item->created_at] += $item;
+            if($item->route_name)
+            {
+                $this->data[(string)$item->route_name] = (int)$item->total;
             }
         }
     }
@@ -110,7 +105,7 @@ class AccessChart extends Chart
     {
         $type = config('meter.monitors.' . RequestMonitor::class . '.graph_type', 'bar');
 
-        $this->dataset('Access', $type, $this->getValues())
+        $this->dataset('Access by route', $type, $this->getValues())
             ->color('rgb(' . static::COLOR_RED . ')')
             ->options([
                 'pointRadius' => 2,

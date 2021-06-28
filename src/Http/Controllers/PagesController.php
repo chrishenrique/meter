@@ -66,11 +66,12 @@ class PagesController extends Controller
     }
 
     public function requests(
+        AccessChart $accessChart,
         RequestTimeChart $timeChart,
         RequestMemoryChart $memoryChart
     )
     {
-        return view('meter::requests', compact('timeChart', 'memoryChart'));
+        return view('meter::requests', compact('timeChart', 'memoryChart', 'accessChart'));
     }
 
     public function commands(CommandsTimeChart $chart)
