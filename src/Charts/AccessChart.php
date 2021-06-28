@@ -8,7 +8,7 @@ use Sarfraznawaz2005\Meter\Models\MeterModel;
 use Sarfraznawaz2005\Meter\Monitors\RequestMonitor;
 use Sarfraznawaz2005\Meter\Type;
 
-class RequestTimeChart extends Chart
+class AccessChart extends Chart
 {
     /**
      * Sets options for chart.
