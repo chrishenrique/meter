@@ -79,6 +79,15 @@
             config('meter.monitors.' . Sarfraznawaz2005\Meter\Monitors\RequestMonitor::class . '.enabled', true) &&
             config('meter.monitors.' . Sarfraznawaz2005\Meter\Monitors\RequestMonitor::class . '.show_on_dashboard', true)
         )
+            <div class="col-12 p-0 border-0">
+                @component('meter::components.chart', ['chart' => $requestTimeChart, 'title' => 'Access'])@endcomponent
+            </div>
+        @endif
+
+        @if (
+            config('meter.monitors.' . Sarfraznawaz2005\Meter\Monitors\RequestMonitor::class . '.enabled', true) &&
+            config('meter.monitors.' . Sarfraznawaz2005\Meter\Monitors\RequestMonitor::class . '.show_on_dashboard', true)
+        )
             <div class="col-md-6 col-lg-6 col-sm-12 p-0 border-0">
                 @component('meter::components.chart', ['chart' => $requestTimeChart, 'title' => 'Response Times'])@endcomponent
             </div>

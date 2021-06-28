@@ -12,6 +12,7 @@ use Sarfraznawaz2005\Meter\Charts\EventsTimeChart;
 use Sarfraznawaz2005\Meter\Charts\QueriesTimeChart;
 use Sarfraznawaz2005\Meter\Charts\RequestMemoryChart;
 use Sarfraznawaz2005\Meter\Charts\RequestTimeChart;
+use Sarfraznawaz2005\Meter\Charts\AccessChart;
 use Sarfraznawaz2005\Meter\Charts\SchedulesTimeChart;
 use Sarfraznawaz2005\Meter\Charts\ServerMemoryChart;
 use Sarfraznawaz2005\Meter\Models\MeterModel;
@@ -19,6 +20,7 @@ use Sarfraznawaz2005\Meter\Models\MeterModel;
 class PagesController extends Controller
 {
     public function home(
+        AccessChart $accessChart,
         RequestTimeChart $requestTimeChart,
         RequestMemoryChart $requestMemoryChart,
         QueriesTimeChart $queriesTimeChart,
@@ -52,7 +54,8 @@ class PagesController extends Controller
                 'cpuChart',
                 'diskSpaceChart',
                 'serverMemoryChart',
-                'connectionsChart'
+                'connectionsChart',
+                'accessChart'
             )
         );
     }
