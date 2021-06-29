@@ -40,7 +40,11 @@ class RequestMonitor extends Monitor
             $isSlow = $duration >= $this->options['slow'];
         }
 
-        $routeName = $event->request->route() ? $event->request->route()->getName() : null;
+        try {
+            $routeName = $event->request->route()->getName();
+        } catch (\Exception $e) {
+            $routeName = null;
+        }
 
         $content = [
             'uri' => str_replace($event->request->root(), '', $event->request->fullUrl()) ?: '/',
