@@ -51,6 +51,7 @@ class RequestMonitor extends Monitor
             'duration' => $duration,
             'memory' => round(memory_get_peak_usage(true) / 1024 / 1025, 1),
             'ip' => $event->request->ip(),
+            'body' => $event->request->all(),
         ];
 
         $this->record(Type::REQUEST, $isSlow, $content, $routeName);
