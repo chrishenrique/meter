@@ -55,7 +55,7 @@ class QueriesTable extends Table
         $transformed = [];
 
         foreach ($rows as $row) {
-            $data['Happened'] = meterWithHtmlTitle(Carbon::parse($row['created_at'])->diffForHumans(), $row['created_at']);
+            $data['Happened'] = meterWithHtmlTitle(Carbon::parse($row['created_at'])->format('d/m/Y H:i:s'), $row['created_at']);
 
             $data['Query'] = '<div class="meter_sql">' . Str::limit($row['content']['sql'], 80) . '</div>';
             $data['Time'] = $row['content']['time'] . ' ms';

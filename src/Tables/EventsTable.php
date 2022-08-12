@@ -54,7 +54,7 @@ class EventsTable extends Table
         $transformed = [];
 
         foreach ($rows as $row) {
-            $data['Happened'] = meterWithHtmlTitle(Carbon::parse($row['created_at'])->diffForHumans(), $row['created_at']);
+            $data['Happened'] = meterWithHtmlTitle(Carbon::parse($row['created_at'])->format('d/m/Y H:i:s'), $row['created_at']);
 
             $data['Event'] = $row['content']['name'];
             $data['Time'] = $row['content']['time'] . ' ms';
