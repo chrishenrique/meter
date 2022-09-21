@@ -54,7 +54,8 @@ class CommandsTable extends Table
         $transformed = [];
 
         foreach ($rows as $row) {
-            $data['Happened'] = meterWithHtmlTitle(Carbon::parse($row['created_at'])->format('d/m/Y H:i:s'), $row['created_at']);
+            $date = Carbon::create($row['created_at'])->subHours(3)->format('d/m/Y H:i:s');
+            $data['Happened'] = meterWithHtmlTitle($date, $date);
 
             $data['Command'] = $row['content']['command'];
             $data['Time'] = $row['content']['time'] . ' ms';

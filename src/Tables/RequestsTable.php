@@ -54,7 +54,8 @@ class RequestsTable extends Table
         $transformed = [];
 
         foreach ($rows as $row) {
-            $data['Happened'] = meterWithHtmlTitle(Carbon::parse($row['created_at'])->format('d/m/Y H:i:s'), $row['created_at']);
+            $date = Carbon::create($row['created_at'])->subHours(3)->format('d/m/Y H:i:s');
+            $data['Happened'] = meterWithHtmlTitle($date, $date);
 
             $data['Verb'] = meterBadge($row['content']['method']);
             $data['Path'] = meterWithHtmlTitle($row['content']['uri'], $row['content']['controller_action']);

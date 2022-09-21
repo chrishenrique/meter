@@ -138,4 +138,6 @@ return [
         '6 Month' => 180,
         'Year' => 365,
     ],
+
+    'timezone' => env('METER_TIMEZONE', 'America/Sao_Paulo'),
 ];
