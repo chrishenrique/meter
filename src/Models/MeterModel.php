@@ -54,9 +54,4 @@ class MeterModel extends Model
 
         return $builder;
     }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return \Carbon\Carbon::createFromTimestamp(strtotime($value));
-    }
 }
