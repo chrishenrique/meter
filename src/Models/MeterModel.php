@@ -57,7 +57,6 @@ class MeterModel extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return \Carbon\Carbon::createFromTimestamp(strtotime($value))
-            ->timezone(config('meter.timezone'));
+        return \Carbon\Carbon::createFromTimestamp(strtotime($value));
     }
 }
